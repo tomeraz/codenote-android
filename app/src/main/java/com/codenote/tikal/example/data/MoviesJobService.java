@@ -56,7 +56,7 @@ public class MoviesJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters jobParameters) {
-        mApi.getMovies(1).enqueue(mResultsCallback);
+        mApi.getSlack(1).enqueue(mResultsCallback);
         jobFinished(jobParameters, false);
         return false;
     }

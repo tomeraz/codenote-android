@@ -102,11 +102,12 @@ public class ListFragment extends Fragment implements
     private void initializeView() {
         page = 1;
         if (isOnline()) {
-            mLayoutManager = new GridLayoutManager(getActivity(), 2);
+            mLayoutManager = new GridLayoutManager(getActivity(), 1);
             mAdapter = new ListAdapter(getActivity(), (MovieViewHolder.Listener) getActivity());
             mRecyclerView.init(mLayoutManager, mAdapter, 4);
             mRecyclerView.setHasMoreData(true);
-            ((MainActivity) getActivity()).getApi().getMovies(page++).enqueue(mResultsCallback);
+            ((MainActivity) getActivity()).getApi().getSlack().enqueue(mResultsCallback);
+            ((MainActivity) getActivity()).getApi().getTrello().enqueue(mResultsCallback);
         } else {
             mLayoutManager = new GridLayoutManager(getActivity(), 2);
             mAdapter = new ListAdapter(getActivity(), (MovieViewHolder.Listener) getActivity());
@@ -132,7 +133,7 @@ public class ListFragment extends Fragment implements
 
     private void loadSearchResults(int offset) {
         try {
-            ((MainActivity) getActivity()).getApi().getMovies(offset).enqueue(mResultsCallback);
+            ((MainActivity) getActivity()).getApi().getSlack().enqueue(mResultsCallback);
         } catch (InvalidParameterException e) {
             getActivity().finish();
         }

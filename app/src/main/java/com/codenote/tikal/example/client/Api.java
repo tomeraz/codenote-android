@@ -9,6 +9,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
+import java.lang.ref.Reference;
 import java.security.InvalidParameterException;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ import retrofit.http.QueryMap;
 
 public class Api {
 
-    public static final String PATH_MOVIES = "/3/discover/movie";
+
     public static final String PATH_MOVIE = "/3/movie/{movie_id}";
     private OkHttpClient mHttpClient;
 
@@ -67,33 +68,29 @@ public class Api {
         return restAdapter.create(Service.class);
     }
 
-    public Call<DiscoverResponse> getMovies(int page) throws InvalidParameterException {
+    public Call<DiscoverResponse> getSlack() throws InvalidParameterException {
 
         Service service = create();
 
-        ArrayMap<String, String> query = new ArrayMap<>();
 
-        query.put("page", String.valueOf(page));
-        query.put("sort_by", "popularity.desc");//first popular movies
-
-        return service.movies(query);
+        return service.slack();
     }
 
-    public Call<MovieResponse> getMovie(int id) throws InvalidParameterException {
-
+    public Call<DiscoverResponse> getTrello() {
         Service service = create();
 
-        return service.movie(id);
+
+        return service.trello();
     }
 
 
     public interface Service {
 
-        @GET(PATH_MOVIES)
-        Call<DiscoverResponse> movies(@QueryMap Map<String, String> query);
+        @GET(PATH_MOVIE)
+        Call<DiscoverResponse> slack();
 
         @GET(PATH_MOVIE)
-        Call<MovieResponse> movie(@Path("movie_id") int movieId);
+        Call<DiscoverResponse> trello();
 
     }
 
