@@ -9,7 +9,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.popular.movies.ortal"
+        applicationId "com.codenote.tikal.example"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1

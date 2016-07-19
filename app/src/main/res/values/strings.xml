@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Pop movies</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">CodeNote</string>
     <string name="action_settings">Settings</string>
 </resources>
